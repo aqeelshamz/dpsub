@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <style>
+      #subtitle {
+        background: rgba(0, 0, 0, 0.2);
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+    </style>
+    <script>
+      const subMap = {
+        0.0: ["1.20", "30", "70", "the guests pay us"],
+        1.41: ["2.00", "60", "30", "to 'Stay among the relics'."],
+        2.5: ["3.20", "10", "30", "Wow!"],
+        3.56: ["4.00", "40", "20", "Beautiful."],
+        4.3: ["4.60", "40", "60", "Yes!"],
+        4.7: ["5.30", "40", "20", "These are?"],
+        5.89: ["6.70", "40", "20", "You see!"],
+        6.82: ["8.25", "50", "20", "To understand style and substance,"],
+        8.25: ["9.80", "50", "20", "you need a classy eye."],
+        9.81: ["10.50", "60", "20", "I like that!"],
+        11.0: ["13.00", "40", "80", "See this!"],
+      };
+
+      setInterval(() => {
+        var vid = document.getElementById("video1");
+        var subtitle = document.getElementById("subtitle");
+        var time = parseFloat(vid.currentTime);
+
+        subtitle.style.innerHTML = "";
+        subtitle.style.opacity = 0;
+
+        Object.keys(subMap).forEach((key) => {
+          if (
+            time >= parseFloat(key).toFixed(2) &&
+            time <= parseFloat(subMap[key][0]).toFixed(2)
+          ) {
+            subtitle.style.transition = "0s";
+            subtitle.style.left = subMap[key][1] + "%";
+            subtitle.style.top = subMap[key][2] + "%";
+            subtitle.innerHTML = subMap[key][3];
+            subtitle.style.opacity = 1;
+          }
+        });
+      }, 100);
+    </script>
+    <p id="d"></p>
+    <p id="e"></p>
+    <div style="width: 800px; position: relative">
+      <div id="subtitle" style="position: absolute"></div>
+      <video id="video1" style="width: 100%" controls>
+        <source src="video.mp4" />
+      </video>
+    </div>
+  </body>
+</html>
